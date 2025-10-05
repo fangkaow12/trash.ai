@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TrashTrack+</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+        <script>
+            function toggleMenu() {
+                const nav = document.getElementById("nav");
+                const menuIcon = document.querySelector(".menu-icon");
+                const menuText = document.querySelector(".menu-text");
+                nav.classList.toggle("active");
+                menuIcon.classList.toggle("close");
+                if (menuIcon.classList.contains("close")) {
+                    menuText.textContent = "Close";
+                } else {
+                    menuText.textContent = "Menu";
+                }
+            }
+        </script>
+    </head>
+    <div>
+        <header>
+        <h1>TrashTrack+</h1>
+        <div class="menu-icon-container" onclick="toggleMenu()">
+            <div class="menu-icon"></div>
+            <span class="menu-text">Menu</span>
+        </div>
+        <nav id="nav">
+            <a href="http://tungaiedu.lnw.mn/project_ai/home.php">HOME</a>
+            <a href="http://tungaiedu.lnw.mn/project_ai/home.php#about">ABOUT</a>
+            <a href="http://tungaiedu.lnw.mn/project_ai/home.php#Dashborad">BIN MAP</a>
+            <a href="http://tungaiedu.lnw.mn/project_ai/home.php#footer">CONTACT</a>
+            <a href="http://tungaiedu.lnw.mn/project_ai/creator.php">CREATORS</a>
+        </nav>
+    </header>
+        <h1 class="text-center">Trash Classifier</h1>
+
+        <form class="p-3 text-center" action='/', method="post" enctype="multipart/form-data">
+            <input class="form-control" type="file" name="imagefile" >
+            <input class="btn btn-primary mt-3"type="submit" value="Predict Image" >
+        </form>
+
+        {% if prediction %}
+            <p class="text-center"> Image is a {{prediction}}</p>
+        {% endif %}
+        
+    </body>
+</html>
